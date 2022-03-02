@@ -1,6 +1,6 @@
 import Head from "next/head"
 import styles from "../styles/Home.module.css"
-import { data } from "./data"
+import { data } from "../utils/data"
 import { useState } from "react"
 import { nanoid } from "nanoid"
 import { TextField } from "@mui/material"
