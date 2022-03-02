@@ -65,7 +65,7 @@ export default function Home() {
         <Button
           variant="contained"
           onClick={generateEmail}
-          sx={{ mt: 3 }}
+          sx={{ mt: 3, width: 300 }}
           disabled={!name}
         >
           Genereer mail
@@ -80,7 +80,7 @@ export default function Home() {
             rows={12}
             autoFocus
             defaultValue={emailBody}
-            sx={{ width: 500, mt: 3 }}
+            sx={{ width: 400, mt: 3 }}
             onChange={handleEmailChange}
           />
           <a
