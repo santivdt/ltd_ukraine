@@ -1161,7 +1161,7 @@ export const data = [
   },
   {
     label: "Utrecht",
-    email: "gemeente@utrecht.nl",
+    email: "raadsleden@utrecht.nl.",
   },
   {
     label: "Utrechtse Heuvelrug",
