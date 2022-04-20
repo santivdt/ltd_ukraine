@@ -10,7 +10,7 @@ import { Button } from "@mui/material"
 export default function Home() {
   const gemeenten = data.map(item => ({ ...item, id: nanoid() }))
   const [value, setValue] = useState(gemeenten[0])
-  const [name, setName] = useState("Santi")
+  const [name, setName] = useState("")
   const [emailBody, setEmailBody] = useState(null)
   const [nieuwsbrief, setNieuwsbrief] = useState(false)
 
