@@ -2,7 +2,7 @@ import styles from "../styles/Home.module.css"
 import { data } from "../utils/data"
 import { useState } from "react"
 import { nanoid } from "nanoid"
-import { TextField } from "@mui/material"
+import { TextField, Checkbox, FormGroup, FormControlLabel } from "@mui/material"
 
 import Autocomplete from "@mui/material/Autocomplete"
 import { Button } from "@mui/material"
@@ -10,11 +10,11 @@ import { Button } from "@mui/material"
 export default function Home() {
   const gemeenten = data.map(item => ({ ...item, id: nanoid() }))
   const [value, setValue] = useState(gemeenten[0])
-  const [name, setName] = useState(null)
+  const [name, setName] = useState("Santi")
   const [emailBody, setEmailBody] = useState(null)
+  const [nieuwsbrief, setNieuwsbrief] = useState(false)
 
   const handleChange = (event, newValue) => {
-    console.log(newValue)
     if (newValue) {
       setValue(newValue)
     }
@@ -26,13 +26,16 @@ export default function Home() {
 
   const generateEmail = () => {
     setEmailBody(
-      `Beste Gemeente ${value.label},\n\nDoor de Russische invasie van Oekraïne wordt de situatie voor de Oekraïense bevolking steeds nijpender. Volgens een schatting van de UNHCR zijn er nu  meer dan 660.000 mensen op de vlucht, naast de mensen die al ontheemd waren. \n\nDe woordvoerder van het Centraal Orgaan opvang Asielzoekers (COA) heeft aangegeven dat de huidige azc’s vol zitten en er naarstig gezocht wordt naar nieuwe opvangplekken. Opvang in de regio was de afgelopen jaren vaak beleid. In deze crisis zijn wij de regio. Wij zijn solidair met burgers die vluchten voor geweld en oorlog, net als in eerdere situaties zoals de Balkanoorlogen. Toen vingen we tot 80.000 vluchtelingen op (bron: RTL Nieuws). Het is onze morele plicht nu dezelfde inzet te tonen.  \n\nIk roep daarom de Gemeente ${value.label} op om panden aan te wijzen die geschikt zijn voor opvang van deze vluchtelingen en opvang actief te faciliteren in samenwerking met het COA.\n\nIk vertrouw erop dat wij ons gastvrij opstellen en de opvang van deze vluchtelingen bewerkstelligen. In afwachting van uw respons. \n\nMet vriendelijke groet, \n ${name} \n\n Ik stuur deze mail als onderdeel van een campagne van DeGoedeZaak voor de opvang van Oekraïense vluchtelingen. \n\n Zie https://www.degoedezaak.org/gemeenten-vang-vluchtelingen-op/ voor meer informatie!`
+      `Geachte burgemeester van ${value.label},\n\nIk zou u graag iets willen vragen over de opvang die onze stad organiseert voor Oekraïense vluchtelingen. Uiteraard bent u op de hoogte van de nijpende situatie in Ter Apel, waar vandaag (19 april) zelfs 300 mensen op straat dreigde te komen staan. Inmiddels is bekend dat Nijmegen, Oss en Amsterdam in de bres zijn gesprongen voor deze asielzoekers die uit een ander land dan Oekraïne gevlucht zijn. Hoewel het probleem tijdelijk is opgelost, zou ik u toch het volgende willen vragen: \n\n1. Is de opvang in onze gemeente al helemaal vol, of zijn daar nog plekken vrij?\n2. Indien daar nog plekken vrij zijn, houdt u die dan vrij voor vluchtelingen uit Oekraïne? \n3. Is het mogelijk om, mede gelet op het gelijkheidsbeginsel zoals neergelegd in artikel 1 van onze Grondwet, deze opvang open te stellen voor asielzoekers voor wie in ter Apel geen plek meer is? \n4. Indien de opvang in onze gemeente vol is, en wederom gelet op het gelijkheidsbeginsel, is het mogelijk om elders in onze stad opvang te realiseren om zo Ter Apel te ontlasten en de asielopvang in ons land iets van zijn waardigheid terug te geven? \n\nIk hoop dat u deze vragen kunt beantwoorden. Ik kan ook als u daar prijs op stelt mijn vragen in een gesprek toelichten.\n\nMet vriendelijke groet\n${name}`
     )
   }
 
   const handleEmailChange = event => {
-    console.log(event.target.value)
     setEmailBody(event.target.value)
+  }
+
+  const handleCheckbox = () => {
+    setNieuwsbrief(!nieuwsbrief)
   }
 
   return (
@@ -60,7 +63,6 @@ export default function Home() {
           sx={{ width: 300 }}
         />
       </div>
-
       {!emailBody && (
         <Button
           variant="contained"
@@ -83,19 +85,46 @@ export default function Home() {
             sx={{ width: 400, mt: 3 }}
             onChange={handleEmailChange}
           />
-          <a
-            href={
-              "mailto:" +
-              value.email +
-              "?subject=Bied Oekraiense vluchtelingen een veilig onderdak&body=" +
-              encodeURIComponent(emailBody)
-            }
-            target="_new"
-          >
-            <Button variant="contained" sx={{ mt: 3 }}>
-              Verstuur
-            </Button>
-          </a>
+          <div>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox checked={nieuwsbrief} onChange={handleCheckbox} />
+                }
+                label="Ja, ik blijf graag op de hoogte van acties van DeGoedeZaak"
+              />
+            </FormGroup>
+          </div>
+          {nieuwsbrief ? (
+            <a
+              href={
+                "mailto:" +
+                value.email +
+                "?subject=Bied Oekraiense vluchtelingen een veilig onderdak&body=" +
+                encodeURIComponent(emailBody) +
+                "&bcc=info@degoedezaak.org"
+              }
+              target="_new"
+            >
+              <Button variant="contained" sx={{ mt: 3 }}>
+                Verstuur
+              </Button>
+            </a>
+          ) : (
+            <a
+              href={
+                "mailto:" +
+                value.email +
+                "?subject=Bied Oekraiense vluchtelingen een veilig onderdak&body=" +
+                encodeURIComponent(emailBody)
+              }
+              target="_new"
+            >
+              <Button variant="contained" sx={{ mt: 3 }}>
+                Verstuur
+              </Button>
+            </a>
+          )}
         </>
       )}
     </div>
