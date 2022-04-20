@@ -10,7 +10,8 @@ import { Button } from "@mui/material"
 export default function Home() {
   const gemeenten = data.map(item => ({ ...item, id: nanoid() }))
   const [value, setValue] = useState(gemeenten[0])
-  const [name, setName] = useState("")
+  const [name, setName] = useState(null)
+  const [zipcode, setZipcode] = useState(null)
   const [emailBody, setEmailBody] = useState(null)
   const [nieuwsbrief, setNieuwsbrief] = useState(false)
 
@@ -26,12 +27,16 @@ export default function Home() {
 
   const generateEmail = () => {
     setEmailBody(
-      `Geachte burgemeester van ${value.label},\n\nIk zou u graag iets willen vragen over de opvang die onze stad organiseert voor Oekraïense vluchtelingen. Uiteraard bent u op de hoogte van de nijpende situatie in Ter Apel, waar vandaag (19 april) zelfs 300 mensen op straat dreigde te komen staan. Inmiddels is bekend dat Nijmegen, Oss en Amsterdam in de bres zijn gesprongen voor deze asielzoekers die uit een ander land dan Oekraïne gevlucht zijn. Hoewel het probleem tijdelijk is opgelost, zou ik u toch het volgende willen vragen: \n\n1. Is de opvang in onze gemeente al helemaal vol, of zijn daar nog plekken vrij?\n2. Indien daar nog plekken vrij zijn, houdt u die dan vrij voor vluchtelingen uit Oekraïne? \n3. Is het mogelijk om, mede gelet op het gelijkheidsbeginsel zoals neergelegd in artikel 1 van onze Grondwet, deze opvang open te stellen voor asielzoekers voor wie in ter Apel geen plek meer is? \n4. Indien de opvang in onze gemeente vol is, en wederom gelet op het gelijkheidsbeginsel, is het mogelijk om elders in onze stad opvang te realiseren om zo Ter Apel te ontlasten en de asielopvang in ons land iets van zijn waardigheid terug te geven? \n\nIk hoop dat u deze vragen kunt beantwoorden. Ik kan ook als u daar prijs op stelt mijn vragen in een gesprek toelichten.\n\nMet vriendelijke groet\n${name}`
+      `Geachte burgemeester van ${value.label},\n\nIk zou u graag iets willen vragen over de opvang die onze stad organiseert voor Oekraïense vluchtelingen. Uiteraard bent u op de hoogte van de nijpende situatie in Ter Apel, waar vandaag (19 april) zelfs 300 mensen op straat dreigde te komen staan. Inmiddels is bekend dat Nijmegen, Oss en Amsterdam in de bres zijn gesprongen voor deze asielzoekers die uit een ander land dan Oekraïne gevlucht zijn. Hoewel het probleem tijdelijk is opgelost, zou ik u toch het volgende willen vragen: \n\n1. Is de opvang in onze gemeente al helemaal vol, of zijn daar nog plekken vrij?\n2. Indien daar nog plekken vrij zijn, houdt u die dan vrij voor vluchtelingen uit Oekraïne? \n3. Is het mogelijk om, mede gelet op het gelijkheidsbeginsel zoals neergelegd in artikel 1 van onze Grondwet, deze opvang open te stellen voor asielzoekers voor wie in ter Apel geen plek meer is? \n4. Indien de opvang in onze gemeente vol is, en wederom gelet op het gelijkheidsbeginsel, is het mogelijk om elders in onze stad opvang te realiseren om zo Ter Apel te ontlasten en de asielopvang in ons land iets van zijn waardigheid terug te geven? \n\nIk hoop dat u deze vragen kunt beantwoorden. Ik kan ook als u daar prijs op stelt mijn vragen in een gesprek toelichten.\n\nMet vriendelijke groet\n${name}\n${zipcode}`
     )
   }
 
   const handleEmailChange = event => {
     setEmailBody(event.target.value)
+  }
+
+  const handleZipChange = event => {
+    setZipcode(event.target.value)
   }
 
   const handleCheckbox = () => {
@@ -60,6 +65,18 @@ export default function Home() {
           variant="outlined"
           value={name}
           onChange={handleNameChange}
+          sx={{ width: 300, mb: 3 }}
+        />
+      </div>
+      <div className={styles.namecontainer}>
+        <TextField
+          id="zip"
+          required
+          label="Postcode"
+          name="zip"
+          variant="outlined"
+          value={zipcode}
+          onChange={handleZipChange}
           sx={{ width: 300 }}
         />
       </div>
