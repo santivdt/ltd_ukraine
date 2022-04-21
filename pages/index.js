@@ -132,7 +132,7 @@ export default function Home() {
               href={
                 "mailto:" +
                 value.email +
-                "?subject=Bied vluchtelingen uit Ter Apel veilig onderdak=" +
+                "?subject=Bied vluchtelingen uit Ter Apel veilig onderdak&body=" +
                 encodeURIComponent(emailBody)
               }
               target="_new"
