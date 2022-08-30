@@ -117,7 +117,7 @@ export default function Home() {
               href={
                 "mailto:" +
                 value.email +
-                "?subject=Bied Oekraiense vluchtelingen een veilig onderdak&body=" +
+                "?subject=Vang vluchtelingen op!&body=" +
                 encodeURIComponent(emailBody) +
                 "&bcc=info@degoedezaak.org"
               }
@@ -132,7 +132,7 @@ export default function Home() {
               href={
                 "mailto:" +
                 value.email +
-                "?subject=Bied vluchtelingen uit Ter Apel veilig onderdak&body=" +
+                "?subject=Vang vluchtelingen op!&body=" +
                 encodeURIComponent(emailBody)
               }
               target="_new"
